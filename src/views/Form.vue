@@ -1,5 +1,6 @@
 <template>
   <div class="form-page">
+    <h2 class="page-title">Application for Ph.D Admission (Full Time)</h2>
     <v-stepper class="stepper elevation-2" v-model="e1">
       <v-stepper-header>
         <v-stepper-step :complete="e1 > 1" step="1">
@@ -1201,8 +1202,13 @@ export default {
 <style lang="scss" scoped>
 .form-page {
   width: 100%;
+  h2 {
+    margin: 2rem 2rem 1.5rem 2.2rem;
+    display: block;
+  }
   .stepper {
     margin: 2rem;
+    margin-top: 0;
     display: block;
     .btn-container {
       width: 100%;
@@ -1302,8 +1308,11 @@ export default {
 }
 
 @media print {
-  .stepper {
+  .stepper,
+  .page-title {
     display: none !important;
+    margin: 0;
+    padding: 0;
   }
   .output {
     display: block !important;
