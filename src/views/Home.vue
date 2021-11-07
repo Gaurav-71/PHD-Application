@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <Form />
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import Form from "../views/Form.vue";
 
-  export default {
-    name: 'Home',
+export default {
+  name: "Home",
 
-    components: {
-      HelloWorld,
-    },
-  }
+  components: {
+    Form,
+  },
+};
 </script>
