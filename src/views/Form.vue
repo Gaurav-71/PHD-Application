@@ -1,619 +1,1022 @@
 <template>
-  <v-stepper class="stepper elevation-2" v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">
-        Basic Details
-      </v-stepper-step>
+  <div class="form-page">
+    <v-stepper class="stepper elevation-2" v-model="e1">
+      <v-stepper-header>
+        <v-stepper-step :complete="e1 > 1" step="1">
+          Basic Details
+        </v-stepper-step>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">
-        Admission Form</v-stepper-step
-      >
-      <v-divider></v-divider>
+        <v-stepper-step :complete="e1 > 2" step="2">
+          Admission Form</v-stepper-step
+        >
+        <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 3" step="3">
-        Address Details</v-stepper-step
-      >
+        <v-stepper-step :complete="e1 > 3" step="3">
+          Address Details</v-stepper-step
+        >
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 4" step="4">
-        Academic Details</v-stepper-step
-      >
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 5" step="5">
-        Professional Details
-      </v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step step="6"> Declaration </v-stepper-step>
-    </v-stepper-header>
+        <v-stepper-step :complete="e1 > 4" step="4">
+          Academic Details</v-stepper-step
+        >
+        <v-divider></v-divider>
+        <v-stepper-step :complete="e1 > 5" step="5">
+          Professional Details
+        </v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="6"> Declaration </v-stepper-step>
+      </v-stepper-header>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <v-text-field
-            v-model="formDetails.s1.name"
-            label="Full Name ( As per Qualifying Exam Marks card )"
-            filled
-          ></v-text-field>
-          <v-text-field
-            v-model="formDetails.s1.dept"
-            label="Department applied for"
-            filled
-          ></v-text-field>
-          <v-text-field
-            v-model="formDetails.s1.year"
-            label="Ph.D for the year"
-            filled
-          ></v-text-field>
-          <v-text-field
-            v-model="formDetails.s1.area"
-            label="Area of research"
-            filled
-          ></v-text-field> </v-card
-        ><v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn color="primary" @click="e1 = 2"> Next </v-btn>
-        </div>
-      </v-stepper-content>
-
-      <v-stepper-content step="2">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <div class="d-flex">
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-card class="mb-12 elevation-0" min-height="200px">
             <v-text-field
-              v-model="formDetails.s2.reg"
-              label="VTU-ETR Reg. No"
+              v-model="formDetails.s1.name"
+              label="Full Name ( As per Qualifying Exam Marks card )"
               filled
             ></v-text-field>
             <v-text-field
-              v-model="formDetails.s2.score"
-              label="Score"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s2.year"
-              label="Year of VTU-ETR"
-              filled
-            ></v-text-field>
-          </div>
-          <v-select
-            :items="eligibility"
-            v-model="formDetails.s2.eligibility"
-            filled
-            label="Any other eligibility criterion "
-          ></v-select>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s2.fname"
-              label="First Name"
+              v-model="formDetails.s1.dept"
+              label="Department applied for"
               filled
             ></v-text-field>
             <v-text-field
-              v-model="formDetails.s2.mname"
-              label="Middle Name"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s2.lname"
-              label="Last Name/Surname/Initials"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s2.date"
-              label="Date of Birth"
-              type="date"
+              v-model="formDetails.s1.year"
+              label="Ph.D for the year"
               filled
             ></v-text-field>
             <v-text-field
-              v-model="formDetails.s2.gender"
-              label="Gender"
+              v-model="formDetails.s1.area"
+              label="Area of research"
               filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s2.blood"
-              label="Blood Group"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s2.aname"
-              label="Father's/Husband's Name"
-              class="mr-2"
-              filled
-            ></v-text-field>
-            <v-select
-              :items="category"
-              v-model="formDetails.s2.category"
-              filled
-              class="ml-2"
-              label="Category"
-            ></v-select>
-          </div>
-        </v-card>
-        <v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn class="mr-3" @click="e1 = 1"> Back </v-btn>
-          <v-btn color="primary" @click="e1 = 3"> Next </v-btn>
-        </div>
-      </v-stepper-content>
-
-      <v-stepper-content step="3">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <h2>Address for Communication</h2>
-          <v-divider class="my-5"></v-divider>
-          <div class="d-flex">
-            <v-select
-              :items="states"
-              v-model="formDetails.s3.communication.state"
-              filled
-              label="State"
-            ></v-select>
-            <v-text-field
-              v-model="formDetails.s3.communication.city"
-              label="City"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.communication.pincode"
-              label="Pincode"
-              filled
-            ></v-text-field>
-          </div>
-          <v-text-field
-            v-model="formDetails.s3.communication.phno"
-            label="Phone Number (with Code)"
-            filled
-          ></v-text-field>
-          <h2>Permanent Address</h2>
-          <v-divider class="my-5"></v-divider>
-          <div class="d-flex">
-            <v-select
-              :items="states"
-              v-model="formDetails.s3.permanent.state"
-              filled
-              label="State"
-            ></v-select>
-            <v-text-field
-              v-model="formDetails.s3.permanent.city"
-              label="City"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.pincode"
-              label="Pincode"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s3.permanent.mobile"
-              label="Mobile No."
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.phno"
-              label="Phone No. (with Code)"
-              class="mx-5"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.emergency"
-              label="Emergency Contact Number "
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s3.permanent.email"
-              label="Email ID"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.domicile"
-              label="Domicile"
-              class="mx-5"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.motherTongue"
-              label="Mother Tongue"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s3.permanent.pob"
-              label="Place of birth"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.sob"
-              label="State of Birth"
-              class="mx-5"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s3.permanent.nationality"
-              label="Nationality"
-              filled
-            ></v-text-field>
-          </div>
-        </v-card>
-        <v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn class="mr-3" @click="e1 = 2"> Back </v-btn>
-          <v-btn color="primary" @click="e1 = 4"> Next </v-btn>
-        </div>
-      </v-stepper-content>
-
-      <v-stepper-content step="4">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <h2>UG Details</h2>
-          <v-divider class="my-5"></v-divider>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s4.ug.college"
-              label="College"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.ug.univ"
-              label="University"
-              class="mx-5"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.ug.yop"
-              label="Year of Passing"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s4.ug.specialization"
-              label="Specialization"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.ug.cgpa"
-              label="Percentage/CGPA"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.ug.thesis"
-              label="Title of UG Thesis"
-              filled
-            ></v-text-field>
-          </div>
-          <h2>PG Details</h2>
-          <v-divider class="my-5"></v-divider>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s4.pg.college"
-              label="College"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.pg.univ"
-              label="University"
-              class="mx-5"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.pg.yop"
-              label="Year of Passing"
-              filled
-            ></v-text-field>
-          </div>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s4.pg.specialization"
-              label="Specialization"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.pg.cgpa"
-              label="Percentage/CGPA"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s4.pg.thesis"
-              label="Title of PG Thesis"
-              filled
-            ></v-text-field>
-          </div>
-        </v-card>
-        <v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn class="mr-3" @click="e1 = 3"> Back </v-btn>
-          <v-btn color="primary" @click="e1 = 5"> Next </v-btn>
-        </div>
-      </v-stepper-content>
-
-      <v-stepper-content step="5">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <h2>Details of Employment (if applicable)</h2>
-          <v-divider class="my-5"></v-divider>
-          <div class="d-flex">
-            <v-text-field
-              v-model="formDetails.s5.name"
-              label=" Name of the Institute/Organization"
-              filled
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s5.designation"
-              label="Designation"
-              filled
-              class="mx-5"
-            ></v-text-field>
-            <v-text-field
-              v-model="formDetails.s5.yoe"
-              label="Years of Experience"
-              filled
-            ></v-text-field>
-          </div>
-          <h2>Professional details in reverse chronological order</h2>
-          <v-divider class="my-5"></v-divider>
-          <div>
-            <div v-for="(i, index) in profCount" :key="index">
-              <div class="d-flex align-center">
-                <p class="mr-5">{{ index + 1 }}.</p>
-                <v-text-field
-                  v-model="formDetails.s5.profDetails.name[index]"
-                  label="Name of the Institute/Organization"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.profDetails.designation[index]"
-                  label="Designation"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.profDetails.from[index]"
-                  label="From"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.profDetails.to[index]"
-                  label="To"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.profDetails.noy[index]"
-                  label="No. of years"
-                  filled
-                ></v-text-field>
-              </div>
-            </div>
-            <div class="btn-container">
-              <v-btn color="black" class="white--text" @click="updateCount(1)"
-                >Add More</v-btn
-              >
-            </div>
-          </div>
-          <h2>Details of Publications in last 3 years</h2>
-          <v-divider class="my-5"></v-divider>
-          <div>
-            <div v-for="(i, index) in publicationCount" :key="index">
-              <div class="d-flex align-center">
-                <p class="mr-5">{{ index + 1 }}.</p>
-                <v-text-field
-                  v-model="formDetails.s5.publications.names[index]"
-                  label="Name of Authors"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.publications.title[index]"
-                  label="Title of Paper"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.publications.jc[index]"
-                  label="Journal/Conference"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.publications.namejc[index]"
-                  label="Name of Journal/Conference"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.publications.doi[index]"
-                  label="Vol issue, DOI"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.publications.year[index]"
-                  label="Year"
-                  filled
-                ></v-text-field>
-              </div>
-            </div>
-            <div class="btn-container">
-              <v-btn color="black" class="white--text" @click="updateCount(2)"
-                >Add More</v-btn
-              >
-            </div>
-          </div>
-
-          <h2>Details of Funded/Consultancy Projects</h2>
-          <v-divider class="my-5"></v-divider>
-          <div>
-            <div v-for="(i, index) in projectCount" :key="index">
-              <div class="d-flex align-center">
-                <p class="mr-5">{{ index + 1 }}.</p>
-                <v-text-field
-                  v-model="formDetails.s5.projects.name[index]"
-                  label="Name of Investigator/s"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.projects.org[index]"
-                  label="Name of the Organization"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.projects.title[index]"
-                  label="Title of Project"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.projects.amt[index]"
-                  label="Amount Sanctioned"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.projects.yos[index]"
-                  label="Year of Sanction"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.projects.duration[index]"
-                  label="Duration"
-                  filled
-                ></v-text-field>
-              </div>
-            </div>
-            <div class="btn-container">
-              <v-btn color="black" class="white--text" @click="updateCount(3)"
-                >Add More</v-btn
-              >
-            </div>
-          </div>
-
-          <h2>Patents if any</h2>
-          <v-divider class="my-5"></v-divider>
-          <div>
-            <div v-for="(i, index) in patentCount" :key="index">
-              <div class="d-flex align-center">
-                <p class="mr-5">{{ index + 1 }}.</p>
-                <v-text-field
-                  v-model="formDetails.s5.patents.name[index]"
-                  label="Name of Investigator/s"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.patents.title[index]"
-                  label="Title of Patent"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.patents.number[index]"
-                  label="Number"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.patents.filed[index]"
-                  label="Filed/Published/Granted"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-                <v-text-field
-                  v-model="formDetails.s5.patents.year[index]"
-                  label="Year"
-                  filled
-                  class="mr-5"
-                ></v-text-field>
-              </div>
-            </div>
-            <div class="btn-container">
-              <v-btn color="black" class="white--text" @click="updateCount(4)"
-                >Add More</v-btn
-              >
-            </div>
-          </div>
-        </v-card>
-        <v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn class="mr-3" @click="e1 = 4"> Back </v-btn>
-          <v-btn color="primary" @click="e1 = 6"> Next </v-btn>
-        </div>
-      </v-stepper-content>
-
-      <v-stepper-content step="6">
-        <v-card class="mb-12 elevation-0" min-height="200px">
-          <h2>Declaration By The Candidate</h2>
-          <v-divider class="my-5"></v-divider>
-          <ol>
-            <li>
-              I declare that particulars and information furnished are fully
-              correct.
-            </li>
-            <li>
-              If there is any false information/fake certificate or any forgery
-              in the particulars / certificates / documents submitted by me to
-              the authorities of RIT /University, my admission may at once be
-              cancelled and necessary action may be taken.
-            </li>
-            <li>
-              I do understand that, my admission at RIT is provisional and
-              subject to approval of the VTU, Belagavi.
-            </li>
-            <li>
-              I Promise to abide by the rules and regulations of the Institution
-              and the University, and I can be subjected to disciplinary action,
-              if need arises, and also I can be dismissed from the college, if I
-              am found not obeying the rules and regulations
-            </li>
-            <li>
-              I agree to adhere to Rules and Regulations, Scheme of study and
-              Examinations of the Autonomous Institute, affiliated to
-              Visvesvaraya Technological University, Belagavi.
-            </li>
-          </ol>
+            ></v-text-field> </v-card
+          ><v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-checkbox
-              class="mr-7"
-              v-model="formDetails.s6.checkbox"
-              label="I agree"
-            ></v-checkbox>
+            <v-btn color="primary" @click="e1 = 2"> Next </v-btn>
           </div>
-        </v-card>
-        <v-divider class="my-5"></v-divider>
-        <div class="btn-container">
-          <v-btn class="mr-3" @click="e1 = 5"> Back </v-btn>
-          <v-btn :disabled="!formDetails.s6.checkbox" color="primary">
-            Print
-          </v-btn>
+        </v-stepper-content>
+
+        <v-stepper-content step="2">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s2.reg"
+                label="VTU-ETR Reg. No"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.score"
+                label="Score"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.year"
+                label="Year of VTU-ETR"
+                filled
+              ></v-text-field>
+            </div>
+            <v-select
+              :items="eligibility"
+              v-model="formDetails.s2.eligibility"
+              filled
+              label="Any other eligibility criterion "
+            ></v-select>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s2.fname"
+                label="First Name"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.mname"
+                label="Middle Name"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.lname"
+                label="Last Name/Surname/Initials"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s2.date"
+                label="Date of Birth"
+                type="date"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.gender"
+                label="Gender"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s2.blood"
+                label="Blood Group"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s2.aname"
+                label="Father's/Husband's Name"
+                class="mr-2"
+                filled
+              ></v-text-field>
+              <v-select
+                :items="category"
+                v-model="formDetails.s2.category"
+                filled
+                class="ml-2"
+                label="Category"
+              ></v-select>
+            </div>
+          </v-card>
+          <v-divider class="my-5"></v-divider>
+          <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 1"> Back </v-btn>
+            <v-btn color="primary" @click="e1 = 3"> Next </v-btn>
+          </div>
+        </v-stepper-content>
+
+        <v-stepper-content step="3">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <h2>Address for Communication</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s3.communication.addr"
+                label="Address"
+                filled
+                class="mr-5"
+              ></v-text-field>
+              <v-select
+                :items="states"
+                v-model="formDetails.s3.communication.state"
+                filled
+                label="State"
+              ></v-select>
+              <v-text-field
+                v-model="formDetails.s3.communication.city"
+                label="City"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.communication.pincode"
+                label="Pincode"
+                filled
+              ></v-text-field>
+            </div>
+            <v-text-field
+              v-model="formDetails.s3.communication.phno"
+              label="Phone Number (with Code)"
+              filled
+            ></v-text-field>
+            <h2>Permanent Address</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s3.permanent.addr"
+                label="Address"
+                filled
+                class="mr-5"
+              ></v-text-field>
+              <v-select
+                :items="states"
+                v-model="formDetails.s3.permanent.state"
+                filled
+                label="State"
+              ></v-select>
+              <v-text-field
+                v-model="formDetails.s3.permanent.city"
+                label="City"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.pincode"
+                label="Pincode"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s3.permanent.mobile"
+                label="Mobile No."
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.phno"
+                label="Phone No. (with Code)"
+                class="mx-5"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.emergency"
+                label="Emergency Contact Number "
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s3.permanent.email"
+                label="Email ID"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.domicile"
+                label="Domicile"
+                class="mx-5"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.motherTongue"
+                label="Mother Tongue"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s3.permanent.pob"
+                label="Place of birth"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.sob"
+                label="State of Birth"
+                class="mx-5"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s3.permanent.nationality"
+                label="Nationality"
+                filled
+              ></v-text-field>
+            </div>
+          </v-card>
+          <v-divider class="my-5"></v-divider>
+          <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 2"> Back </v-btn>
+            <v-btn color="primary" @click="e1 = 4"> Next </v-btn>
+          </div>
+        </v-stepper-content>
+
+        <v-stepper-content step="4">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <h2>UG Details</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s4.ug.college"
+                label="College"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.ug.univ"
+                label="University"
+                class="mx-5"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.ug.yop"
+                label="Year of Passing"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s4.ug.specialization"
+                label="Specialization"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.ug.cgpa"
+                label="Percentage/CGPA"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.ug.thesis"
+                label="Title of UG Thesis"
+                filled
+              ></v-text-field>
+            </div>
+            <h2>PG Details</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s4.pg.college"
+                label="College"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.pg.univ"
+                label="University"
+                class="mx-5"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.pg.yop"
+                label="Year of Passing"
+                filled
+              ></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s4.pg.specialization"
+                label="Specialization"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.pg.cgpa"
+                label="Percentage/CGPA"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s4.pg.thesis"
+                label="Title of PG Thesis"
+                filled
+              ></v-text-field>
+            </div>
+          </v-card>
+          <v-divider class="my-5"></v-divider>
+          <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 3"> Back </v-btn>
+            <v-btn color="primary" @click="e1 = 5"> Next </v-btn>
+          </div>
+        </v-stepper-content>
+
+        <v-stepper-content step="5">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <h2>Details of Employment (if applicable)</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s5.name"
+                label=" Name of the Institute/Organization"
+                filled
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s5.designation"
+                label="Designation"
+                filled
+                class="mx-5"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s5.yoe"
+                label="Years of Experience"
+                filled
+              ></v-text-field>
+            </div>
+            <h2>Professional details in reverse chronological order</h2>
+            <v-divider class="my-5"></v-divider>
+            <div>
+              <div v-for="(i, index) in profCount" :key="index">
+                <div class="d-flex align-center">
+                  <p class="mr-5">{{ index + 1 }}.</p>
+                  <v-text-field
+                    v-model="formDetails.s5.profDetails.name[index]"
+                    label="Name of the Institute/Organization"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.profDetails.designation[index]"
+                    label="Designation"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.profDetails.from[index]"
+                    label="From"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.profDetails.to[index]"
+                    label="To"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.profDetails.noy[index]"
+                    label="No. of years"
+                    filled
+                  ></v-text-field>
+                </div>
+              </div>
+              <div class="btn-container">
+                <v-btn color="black" class="white--text" @click="updateCount(1)"
+                  >Add More</v-btn
+                >
+              </div>
+            </div>
+            <h2>Details of Publications in last 3 years</h2>
+            <v-divider class="my-5"></v-divider>
+            <div>
+              <div v-for="(i, index) in publicationCount" :key="index">
+                <div class="d-flex align-center">
+                  <p class="mr-5">{{ index + 1 }}.</p>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.names[index]"
+                    label="Name of Authors"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.title[index]"
+                    label="Title of Paper"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.jc[index]"
+                    label="Journal/Conference"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.namejc[index]"
+                    label="Name of Journal/Conference"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.doi[index]"
+                    label="Vol issue, DOI"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.publications.year[index]"
+                    label="Year"
+                    filled
+                  ></v-text-field>
+                </div>
+              </div>
+              <div class="btn-container">
+                <v-btn color="black" class="white--text" @click="updateCount(2)"
+                  >Add More</v-btn
+                >
+              </div>
+            </div>
+
+            <h2>Details of Funded/Consultancy Projects</h2>
+            <v-divider class="my-5"></v-divider>
+            <div>
+              <div v-for="(i, index) in projectCount" :key="index">
+                <div class="d-flex align-center">
+                  <p class="mr-5">{{ index + 1 }}.</p>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.name[index]"
+                    label="Name of Investigator/s"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.org[index]"
+                    label="Name of the Organization"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.title[index]"
+                    label="Title of Project"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.amt[index]"
+                    label="Amount Sanctioned"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.yos[index]"
+                    label="Year of Sanction"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.projects.duration[index]"
+                    label="Duration"
+                    filled
+                  ></v-text-field>
+                </div>
+              </div>
+              <div class="btn-container">
+                <v-btn color="black" class="white--text" @click="updateCount(3)"
+                  >Add More</v-btn
+                >
+              </div>
+            </div>
+
+            <h2>Patents if any</h2>
+            <v-divider class="my-5"></v-divider>
+            <div>
+              <div v-for="(i, index) in patentCount" :key="index">
+                <div class="d-flex align-center">
+                  <p class="mr-5">{{ index + 1 }}.</p>
+                  <v-text-field
+                    v-model="formDetails.s5.patents.name[index]"
+                    label="Name of Investigator/s"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.patents.title[index]"
+                    label="Title of Patent"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.patents.number[index]"
+                    label="Number"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.patents.filed[index]"
+                    label="Filed/Published/Granted"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formDetails.s5.patents.year[index]"
+                    label="Year"
+                    filled
+                    class="mr-5"
+                  ></v-text-field>
+                </div>
+              </div>
+              <div class="btn-container">
+                <v-btn color="black" class="white--text" @click="updateCount(4)"
+                  >Add More</v-btn
+                >
+              </div>
+            </div>
+          </v-card>
+          <v-divider class="my-5"></v-divider>
+          <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 4"> Back </v-btn>
+            <v-btn color="primary" @click="e1 = 6"> Next </v-btn>
+          </div>
+        </v-stepper-content>
+
+        <v-stepper-content step="6">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <h2>Declaration By The Candidate</h2>
+            <v-divider class="my-5"></v-divider>
+            <ol>
+              <li>
+                I declare that particulars and information furnished are fully
+                correct.
+              </li>
+              <li>
+                If there is any false information/fake certificate or any
+                forgery in the particulars / certificates / documents submitted
+                by me to the authorities of RIT /University, my admission may at
+                once be cancelled and necessary action may be taken.
+              </li>
+              <li>
+                I do understand that, my admission at RIT is provisional and
+                subject to approval of the VTU, Belagavi.
+              </li>
+              <li>
+                I Promise to abide by the rules and regulations of the
+                Institution and the University, and I can be subjected to
+                disciplinary action, if need arises, and also I can be dismissed
+                from the college, if I am found not obeying the rules and
+                regulations
+              </li>
+              <li>
+                I agree to adhere to Rules and Regulations, Scheme of study and
+                Examinations of the Autonomous Institute, affiliated to
+                Visvesvaraya Technological University, Belagavi.
+              </li>
+            </ol>
+            <div class="btn-container">
+              <v-checkbox
+                class="mr-7"
+                v-model="formDetails.s6.checkbox"
+                label="I agree"
+              ></v-checkbox>
+            </div>
+          </v-card>
+          <v-divider class="my-5"></v-divider>
+          <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 5"> Back </v-btn>
+            <v-btn
+              :disabled="!formDetails.s6.checkbox"
+              @click="prtScreen()"
+              color="primary"
+            >
+              Print
+            </v-btn>
+          </div>
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
+    <div class="output">
+      <div class="header">
+        <img src="../assets/purple.png" alt="" />
+        <!-- <p>
+          Autonomous Institute, affiliated to Visvesvaraya Technological
+          University, Belagavi
+        </p>
+        <h4>VIDYA SOUDHA</h4>
+        <p>
+          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
+        </p>
+        <p>Subject to Bangalore Jurisdiction Only</p>
+        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
+        <div class="divider"></div>
+        <div class="contacts">
+          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
+          <p><b>Website </b> : www.msrit.edu</p>
+          <p><b>Email </b>: principal@msrit.edu</p>
         </div>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
+        <div class="divider"></div>
+      </div>
+      <div class="page p1">
+        <h3>APPLICATION FOR Ph.D ADMISSION (FULL TIME)</h3>
+        <div class="name">
+          <div class="top">Affix Recent Passport Photograph</div>
+          <div class="bottom">
+            <b> Full Name Of Applicant </b> :
+            <span> {{ formDetails.s1.name }}</span>
+          </div>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Department applied for</b> : {{ formDetails.s1.dept }}</p>
+          <p><b>Ph.D for the year</b> : {{ formDetails.s1.year }}</p>
+        </div>
+        <p><b>Area of Research </b> : {{ formDetails.s1.area }}</p>
+        <div class="d-flex justify-center mt-2">
+          <p><b> 'A' ADMISSION FORM</b></p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>VTU-ETR Reg. No</b> : {{ formDetails.s2.reg }}</p>
+          <p><b>Score</b> : {{ formDetails.s2.score }}</p>
+          <p><b>Year of VTU-ETR</b> : {{ formDetails.s2.year }}</p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p>
+            <b>Any other eligibility criterion </b> :
+            {{ formDetails.s2.eligibility }}
+          </p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>First Name </b> : {{ formDetails.s2.fname }}</p>
+          <p><b>Middle Name </b> : {{ formDetails.s2.mname }}</p>
+          <p><b>Last Name/Surname/Initial </b> : {{ formDetails.s2.lname }}</p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Date of Birth</b> : {{ formDetails.s2.date }}</p>
+          <p><b>Gender</b> : {{ formDetails.s2.gender }}</p>
+          <p><b>Blood Group</b> : {{ formDetails.s2.blood }}</p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Father’s/Husband’s Name</b> : {{ formDetails.s2.aname }}</p>
+          <p><b>Category</b> : {{ formDetails.s2.category }}</p>
+        </div>
+        <p><b>Address for Communication :-</b></p>
+        <div class="divider"></div>
+        <div class="d-flex justify-space-between mt-2">
+          {{ formDetails.s3.communication.addr }},
+          {{ formDetails.s3.communication.city }},
+          {{ formDetails.s3.communication.state }},
+          {{ formDetails.s3.communication.pincode }}
+        </div>
+        <p><b>Phone Number</b> : {{ formDetails.s3.communication.phno }}</p>
+        <p><b>Permanent Address :-</b></p>
+        <div class="divider"></div>
+        <div class="d-flex justify-space-between mt-2">
+          {{ formDetails.s3.permanent.addr }},
+          {{ formDetails.s3.permanent.city }},
+          {{ formDetails.s3.permanent.state }},
+          {{ formDetails.s3.permanent.pincode }}
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Phone No.</b> : {{ formDetails.s3.permanent.phno }}</p>
+          <p><b>Mobile No.</b> : {{ formDetails.s3.permanent.mobile }}</p>
+          <p>
+            <b>Emergency No.</b> :
+            {{ formDetails.s3.permanent.emergency }}
+          </p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Email</b>: {{ formDetails.s3.permanent.email }}</p>
+          <p><b>Nationality</b>: {{ formDetails.s3.permanent.nationality }}</p>
+          <p>
+            <b>Mother Tongue</b>: {{ formDetails.s3.permanent.motherTongue }}
+          </p>
+        </div>
+        <div class="d-flex justify-space-between mt-2">
+          <p><b>Domicile</b>: {{ formDetails.s3.permanent.domicile }}</p>
+          <p><b>Place of Birth</b>: {{ formDetails.s3.permanent.pob }}</p>
+          <p><b>State of Birth</b>: {{ formDetails.s3.permanent.sob }}</p>
+        </div>
+      </div>
+      <div class="header">
+        <img src="../assets/purple.png" alt="" />
+        <!-- <p>
+          Autonomous Institute, affiliated to Visvesvaraya Technological
+          University, Belagavi
+        </p>
+        <h4>VIDYA SOUDHA</h4>
+        <p>
+          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
+        </p>
+        <p>Subject to Bangalore Jurisdiction Only</p>
+        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
+        <div class="divider"></div>
+        <div class="contacts">
+          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
+          <p><b>Website </b> : www.msrit.edu</p>
+          <p><b>Email </b>: principal@msrit.edu</p>
+        </div>
+        <div class="divider"></div>
+      </div>
+      <div class="page p2">
+        <div class="d-flex justify-center mt-6">
+          <p><b>'B' ACADEMIC DETAILS</b></p>
+        </div>
+        <table>
+          <tr>
+            <th>Sl No.</th>
+            <th>Degree</th>
+            <th>Year of passing</th>
+            <th>College</th>
+            <th>University</th>
+            <th>Specialization</th>
+            <th>Percentage/CGPA</th>
+          </tr>
+          <tr>
+            <td>1.</td>
+            <td>UG</td>
+            <td>{{ formDetails.s4.ug.yop }}</td>
+            <td>{{ formDetails.s4.ug.college }}</td>
+            <td>{{ formDetails.s4.ug.univ }}</td>
+            <td>{{ formDetails.s4.ug.specialization }}</td>
+            <td>{{ formDetails.s4.ug.cgpa }}</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>PG</td>
+            <td>{{ formDetails.s4.pg.yop }}</td>
+            <td>{{ formDetails.s4.pg.college }}</td>
+            <td>{{ formDetails.s4.pg.univ }}</td>
+            <td>{{ formDetails.s4.pg.specialization }}</td>
+            <td>{{ formDetails.s4.pg.cgpa }}</td>
+          </tr>
+        </table>
+        <table class="mt-10">
+          <tr>
+            <th>Title of UG Thesis</th>
+            <td>{{ formDetails.s4.ug.thesis }}</td>
+          </tr>
+          <tr>
+            <th>Title of PG Thesis</th>
+            <td>{{ formDetails.s4.pg.thesis }}</td>
+          </tr>
+        </table>
+        <div class="d-flex justify-center mt-6">
+          <p><b>'C' PROFESSIONAL DETAILS</b></p>
+        </div>
+        <p><b>Details of Employment :-</b></p>
+        <p>
+          <b>1. Name of the Institute/Organization</b> :
+          {{ formDetails.s5.name }}
+        </p>
+        <p><b>2. Designation</b> : {{ formDetails.s5.designation }}</p>
+        <p><b>3. Years of experience</b> : {{ formDetails.s5.yoe }}</p>
+        <p><b>4. Professional details in reverse chronological order </b> :-</p>
+        <table>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Name of the Institute/Organization</th>
+            <th>Designation</th>
+            <th>From</th>
+            <th>To</th>
+            <th>No. of years</th>
+          </tr>
+          <tr v-for="(i, index) in profCount" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ formDetails.s5.profDetails.name[index] }}</td>
+            <td>{{ formDetails.s5.profDetails.designation[index] }}</td>
+            <td>{{ formDetails.s5.profDetails.from[index] }}</td>
+            <td>{{ formDetails.s5.profDetails.to[index] }}</td>
+            <td>{{ formDetails.s5.profDetails.noy[index] }}</td>
+          </tr>
+        </table>
+        <p class="mt-4"><b>5. Details of Publications in last 3 years</b>:-</p>
+        <table>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Name of Authors</th>
+            <th>Title of Paper</th>
+            <th>Journal / conference</th>
+            <th>Name of Journal / conference</th>
+            <th>Vol. issue, DOI</th>
+            <th>Year</th>
+          </tr>
+          <tr v-for="(i, index) in publicationCount" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ formDetails.s5.publications.names[index] }}</td>
+            <td>{{ formDetails.s5.publications.title[index] }}</td>
+            <td>{{ formDetails.s5.publications.jc[index] }}</td>
+            <td>{{ formDetails.s5.publications.namejc[index] }}</td>
+            <td>{{ formDetails.s5.publications.doi[index] }}</td>
+            <td>{{ formDetails.s5.publications.year[index] }}</td>
+          </tr>
+        </table>
+        <p class="mt-4"><b>6. Details of Funded/Consultancy Projects</b>:-</p>
+        <table>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Name of Investigator/s</th>
+            <th>Name of the Organization</th>
+            <th>Title of Project</th>
+            <th>Amount Sanctioned</th>
+            <th>Year of Sanction</th>
+            <th>Duration</th>
+          </tr>
+          <tr v-for="(i, index) in projectCount" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ formDetails.s5.projects.name[index] }}</td>
+            <td>{{ formDetails.s5.projects.org[index] }}</td>
+            <td>{{ formDetails.s5.projects.title[index] }}</td>
+            <td>{{ formDetails.s5.projects.amt[index] }}</td>
+            <td>{{ formDetails.s5.projects.yos[index] }}</td>
+            <td>{{ formDetails.s5.projects.duration[index] }}</td>
+          </tr>
+        </table>
+        <p class="mt-4"><b>7. Patents if any</b>:-</p>
+        <table>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Name of Investigator/s</th>
+            <th>Title of Patent</th>
+            <th>Number</th>
+            <th>Filed/Published/Granted</th>
+            <th>Year</th>
+          </tr>
+          <tr v-for="(i, index) in patentCount" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ formDetails.s5.patents.name[index] }}</td>
+            <td>{{ formDetails.s5.patents.title[index] }}</td>
+            <td>{{ formDetails.s5.patents.number[index] }}</td>
+            <td>{{ formDetails.s5.patents.filed[index] }}</td>
+            <td>{{ formDetails.s5.patents.year[index] }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="header">
+        <img src="../assets/purple.png" alt="" />
+        <!-- <p>
+          Autonomous Institute, affiliated to Visvesvaraya Technological
+          University, Belagavi
+        </p>
+        <h4>VIDYA SOUDHA</h4>
+        <p>
+          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
+        </p>
+        <p>Subject to Bangalore Jurisdiction Only</p>
+        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
+        <div class="divider"></div>
+        <div class="contacts">
+          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
+          <p><b>Website </b> : www.msrit.edu</p>
+          <p><b>Email </b>: principal@msrit.edu</p>
+        </div>
+        <div class="divider"></div>
+      </div>
+      <div class="page p3">
+        <div class="d-flex justify-center mt-6">
+          <p><b>Declaration By The Candidate</b></p>
+        </div>
+        <ol>
+          <li>
+            I declare that particulars and information furnished are fully
+            correct.
+          </li>
+          <li>
+            If there is any false information/fake certificate or any forgery in
+            the particulars / certificates / documents submitted by me to the
+            authorities of RIT /University, my admission may at once be
+            cancelled and necessary action may be taken.
+          </li>
+          <li>
+            I do understand that, my admission at RIT is provisional and subject
+            to approval of the VTU, Belagavi.
+          </li>
+          <li>
+            I Promise to abide by the rules and regulations of the Institution
+            and the University, and I can be subjected to disciplinary action,
+            if need arises, and also I can be dismissed from the college, if I
+            am found not obeying the rules and regulations
+          </li>
+          <li>
+            I agree to adhere to Rules and Regulations, Scheme of study and
+            Examinations of the Autonomous Institute, affiliated to Visvesvaraya
+            Technological University, Belagavi.
+          </li>
+        </ol>
+        <div class="d-flex justify-space-between mt-15">
+          <p><b>Date</b> :</p>
+          <p><b>Signature of the Candidate</b></p>
+        </div>
+        <p><b>Place</b> :</p>
+        <p class="mt-5">
+          <b>Documents to be attached with application form</b> :-
+        </p>
+        <table>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Documents</th>
+            <th>Yes / No</th>
+          </tr>
+          <tr>
+            <td>1.</td>
+            <td>
+              10th Standard marks card as proof for the date of birth (Attested)
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>
+              Marks cards and Degree Certificate of Under Graduate (Attested)
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>3.</td>
+            <td>
+              Marks cards and Degree Certificate of Post Graduate (Attested)
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>4.</td>
+            <td>Valid competitive examination certificate</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>5.</td>
+            <td>Migration Certificate, if from outside Karnataka state</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>6.</td>
+            <td>Payment receipt of application fee</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>7.</td>
+            <td>Aadhaar card</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>8.</td>
+            <td>
+              No Objection Certificate from the institute/organization, if
+              applicable
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>9.</td>
+            <td>Abstract of Research Problem (maximum of 1000 words)</td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      e1: 6,
+      e1: 1,
       profCount: [0],
       publicationCount: [0],
       projectCount: [0],
@@ -690,12 +1093,14 @@ export default {
         },
         s3: {
           communication: {
+            addr: "",
             state: "",
             city: "",
             pincode: "",
             phno: "",
           },
           permanent: {
+            addr: "",
             state: "",
             city: "",
             pincode: "",
@@ -770,6 +1175,9 @@ export default {
     };
   },
   methods: {
+    prtScreen() {
+      window.print();
+    },
     updateCount(type) {
       switch (type) {
         case 1:
@@ -791,19 +1199,120 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.stepper {
-  margin: 2rem;
-  .btn-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 0.5rem;
-  }
-  ol {
-    li {
-      margin: 1rem 0;
+.form-page {
+  width: 100%;
+  .stepper {
+    margin: 2rem;
+    display: block;
+    .btn-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 0.5rem;
     }
+    ol {
+      li {
+        margin: 1rem 0;
+      }
+    }
+  }
+  .output {
+    display: none;
+    .divider {
+      //margin: 0.5rem 0;
+      height: 0.5px;
+      width: 100%;
+      background: #000;
+    }
+    .header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+      }
+
+      p {
+        font-size: xx-small;
+        margin: 0;
+        padding: 0;
+      }
+      h4 {
+        margin: 0;
+        padding: 0;
+      }
+      .contacts {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 2rem;
+      page-break-after: always;
+    }
+    .p1 {
+      h3 {
+        width: 100%;
+        text-align: center;
+        margin: 1rem 0 0.5rem 0;
+      }
+      .name {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+        .top {
+          width: 125px;
+          height: 150px;
+          border: 1px solid black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .bottom {
+          margin-top: 1rem;
+          span {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    td,
+    th {
+      text-align: center;
+      padding: 0.25rem;
+    }
+  }
+}
+
+@media print {
+  .stepper {
+    display: none !important;
+  }
+  .output {
+    display: block !important;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
   }
 }
 </style>
