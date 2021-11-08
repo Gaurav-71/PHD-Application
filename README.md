@@ -2,7 +2,7 @@
 
 ## Website Link
 
-https://rit-phd-applications.web.app/
+https://msrit-phd-applications.web.app/
 
 ## Project setup
 

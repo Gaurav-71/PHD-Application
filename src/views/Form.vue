@@ -42,7 +42,12 @@
           <v-card class="mb-12 elevation-0" min-height="200px">
             <h2>Transaction Details</h2>
             <v-divider class="my-5"></v-divider>
-            <div class="d-flex">
+            <h3>
+              <b class="red--text">Note </b>: A fee of Rs.2000 must be paid as
+              application fees to the bank account mentioned below. Once paid,
+              please enter the transaction ID & date
+            </h3>
+            <div class="d-flex mt-4">
               <v-text-field
                 v-model="formDetails.s0.tid"
                 label="Transaction ID"
@@ -158,12 +163,13 @@
                 type="date"
                 filled
               ></v-text-field>
-              <v-text-field
+              <v-select
+                :items="genders"
                 v-model="formDetails.s2.gender"
-                label="Gender"
                 filled
+                label="Gender"
                 class="mx-5"
-              ></v-text-field>
+              ></v-select>
               <v-text-field
                 v-model="formDetails.s2.blood"
                 label="Blood Group"
@@ -1056,13 +1062,13 @@ export default {
         "Chhattisgarh",
         "Dadra and Nagar Haveli and Daman and Diu",
         "Goa",
-        "Gujurat",
+        "Gujarat",
         "Haryana",
         "Himachal Pradesh",
         "Jammu and Kashmir",
         "Jharkhand",
         "Karnataka",
-        "Kerela",
+        "Kerala",
         "Ladakh",
         "Lakshadweep",
         "Madhya Pradesh",
@@ -1084,6 +1090,7 @@ export default {
         "Uttar Pradesh",
         "West Bengal",
       ],
+      genders: ["Male", "Female"],
       type: ["Journal", "Conference"],
       patentStatus: ["Filed", "Granted", "Published"],
       formDetails: {
