@@ -249,12 +249,13 @@
                 label="Place of birth"
                 filled
               ></v-text-field>
-              <v-text-field
+              <v-select
+                :items="states"
                 v-model="formDetails.s3.permanent.sob"
+                filled
                 label="State of Birth"
                 class="mx-5"
-                filled
-              ></v-text-field>
+              ></v-select>
               <v-text-field
                 v-model="formDetails.s3.permanent.nationality"
                 label="Nationality"
@@ -438,15 +439,20 @@
                     filled
                     class="mr-5"
                   ></v-text-field>
-                  <v-text-field
+                  <v-select
+                    :items="type"
                     v-model="formDetails.s5.publications.jc[index]"
-                    label="Journal/Conference"
                     filled
+                    label="Journal/Conference"
                     class="mr-5"
-                  ></v-text-field>
+                  ></v-select>
                   <v-text-field
                     v-model="formDetails.s5.publications.namejc[index]"
-                    label="Name of Journal/Conference"
+                    :label="
+                      formDetails.s5.publications.jc[index]
+                        ? 'Name of ' + formDetails.s5.publications.jc[index]
+                        : 'Name'
+                    "
                     filled
                     class="mr-5"
                   ></v-text-field>
@@ -544,12 +550,13 @@
                     filled
                     class="mr-5"
                   ></v-text-field>
-                  <v-text-field
+                  <v-select
+                    :items="patentStatus"
                     v-model="formDetails.s5.patents.filed[index]"
-                    label="Filed/Published/Granted"
                     filled
+                    label="Filed/Published/Granted"
                     class="mr-5"
-                  ></v-text-field>
+                  ></v-select>
                   <v-text-field
                     v-model="formDetails.s5.patents.year[index]"
                     label="Year"
@@ -650,11 +657,11 @@
       <div class="page p1">
         <h3>APPLICATION FOR Ph.D ADMISSION (FULL TIME)</h3>
         <div class="name">
-          <div class="top">Affix Recent Passport Photograph</div>
           <div class="bottom">
             <b> Full Name Of Applicant </b> :
             <span> {{ formDetails.s1.name }}</span>
           </div>
+          <div class="top">Affix Recent Passport Photograph</div>
         </div>
         <div class="d-flex justify-space-between mt-2">
           <p><b>Department applied for</b> : {{ formDetails.s1.dept }}</p>
@@ -1017,7 +1024,7 @@
 export default {
   data() {
     return {
-      e1: 1,
+      e1: 5,
       profCount: [0],
       publicationCount: [0],
       projectCount: [0],
@@ -1071,6 +1078,8 @@ export default {
         "Uttar Pradesh",
         "West Bengal",
       ],
+      type: ["Journal", "Conference"],
+      patentStatus: ["Filed", "Granted", "Published"],
       formDetails: {
         s1: {
           name: "",
@@ -1202,7 +1211,7 @@ export default {
 <style lang="scss" scoped>
 .form-page {
   width: 100%;
-  h2 {
+  .page-title {
     margin: 2rem 2rem 1.5rem 2.2rem;
     display: block;
   }
@@ -1272,9 +1281,9 @@ export default {
       .name {
         width: 100%;
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
         align-items: center;
-        margin-top: 1rem;
+        margin: 1rem 0;
         .top {
           width: 125px;
           height: 150px;
@@ -1292,7 +1301,6 @@ export default {
         }
       }
     }
-
     table,
     th,
     td {
@@ -1303,6 +1311,17 @@ export default {
     th {
       text-align: center;
       padding: 0.25rem;
+    }
+    .p3 {
+      ol {
+        li {
+          text-align: justify;
+          margin: 0.8rem 0;
+        }
+      }
+      td {
+        text-align: left;
+      }
     }
   }
 }
