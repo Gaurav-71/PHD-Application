@@ -3,6 +3,12 @@
     <h2 class="page-title">Application for Ph.D Admission (Full Time)</h2>
     <v-stepper class="stepper elevation-2" v-model="e1">
       <v-stepper-header>
+        <v-stepper-step :complete="e1 > 0" step="0">
+          Payment Details
+        </v-stepper-step>
+
+        <v-divider></v-divider>
+
         <v-stepper-step :complete="e1 > 1" step="1">
           Basic Details
         </v-stepper-step>
@@ -32,6 +38,45 @@
       </v-stepper-header>
 
       <v-stepper-items>
+        <v-stepper-content step="0">
+          <v-card class="mb-12 elevation-0" min-height="200px">
+            <h2>Transaction Details</h2>
+            <v-divider class="my-5"></v-divider>
+            <div class="d-flex">
+              <v-text-field
+                v-model="formDetails.s0.tid"
+                label="Transaction ID"
+                filled
+                class="mr-2"
+              ></v-text-field>
+              <v-text-field
+                v-model="formDetails.s0.date"
+                label="Date"
+                filled
+                type="date"
+                class="ml-2"
+              ></v-text-field>
+            </div>
+            <h2>Bank Details for RTGS</h2>
+            <v-divider class="my-5"></v-divider>
+            <p>
+              <b>Account Holder's Name</b> : M.S. Ramaiah Institute of
+              Technology
+            </p>
+            <p><b>Name of the Bank</b> : Karnataka Bank</p>
+            <p>
+              <b>Name of the Branch</b> : Nehru Nagar Branch, Bangalore - 560020
+            </p>
+            <p><b>S.B. Account No.</b> : 0632500102466601</p>
+            <p><b>IFSC Code</b> : KARB0000063</p>
+            <p><b>MICR Code</b> : 560052018</p>
+            <p><b>Swift Code</b> : KARBINBBBNG</p>
+          </v-card>
+          <div class="btn-container">
+            <v-btn color="primary" @click="e1 = 1"> Next </v-btn>
+          </div>
+        </v-stepper-content>
+
         <v-stepper-content step="1">
           <v-card class="mb-12 elevation-0" min-height="200px">
             <v-text-field
@@ -48,6 +93,7 @@
               v-model="formDetails.s1.year"
               label="Ph.D for the year"
               filled
+              disabled
             ></v-text-field>
             <v-text-field
               v-model="formDetails.s1.area"
@@ -56,6 +102,7 @@
             ></v-text-field> </v-card
           ><v-divider class="my-5"></v-divider>
           <div class="btn-container">
+            <v-btn class="mr-3" @click="e1 = 0"> Back </v-btn>
             <v-btn color="primary" @click="e1 = 2"> Next </v-btn>
           </div>
         </v-stepper-content>
@@ -634,28 +681,9 @@
       </v-stepper-items>
     </v-stepper>
     <div class="output">
-      <div class="header">
-        <img src="../assets/purple.png" alt="" />
-        <!-- <p>
-          Autonomous Institute, affiliated to Visvesvaraya Technological
-          University, Belagavi
-        </p>
-        <h4>VIDYA SOUDHA</h4>
-        <p>
-          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
-        </p>
-        <p>Subject to Bangalore Jurisdiction Only</p>
-        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
-        <div class="divider"></div>
-        <div class="contacts">
-          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
-          <p><b>Website </b> : www.msrit.edu</p>
-          <p><b>Email </b>: principal@msrit.edu</p>
-        </div>
-        <div class="divider"></div>
-      </div>
+      <Header />
       <div class="page p1">
-        <h3>APPLICATION FOR Ph.D ADMISSION (FULL TIME)</h3>
+        <h3>APPLICATION FOR Ph.D ADMISSION (FULL TIME) 2021-2022</h3>
         <div class="name">
           <div class="bottom">
             <b> Full Name Of Applicant </b> :
@@ -697,8 +725,7 @@
           <p><b>Category</b> : {{ formDetails.s2.category }}</p>
         </div>
         <p><b>Address for Communication :-</b></p>
-        <div class="divider"></div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between mt-0">
           {{ formDetails.s3.communication.addr }},
           {{ formDetails.s3.communication.city }},
           {{ formDetails.s3.communication.state }},
@@ -706,8 +733,7 @@
         </div>
         <p><b>Phone Number</b> : {{ formDetails.s3.communication.phno }}</p>
         <p><b>Permanent Address :-</b></p>
-        <div class="divider"></div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between mt-0">
           {{ formDetails.s3.permanent.addr }},
           {{ formDetails.s3.permanent.city }},
           {{ formDetails.s3.permanent.state }},
@@ -734,26 +760,7 @@
           <p><b>State of Birth</b>: {{ formDetails.s3.permanent.sob }}</p>
         </div>
       </div>
-      <div class="header">
-        <img src="../assets/purple.png" alt="" />
-        <!-- <p>
-          Autonomous Institute, affiliated to Visvesvaraya Technological
-          University, Belagavi
-        </p>
-        <h4>VIDYA SOUDHA</h4>
-        <p>
-          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
-        </p>
-        <p>Subject to Bangalore Jurisdiction Only</p>
-        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
-        <div class="divider"></div>
-        <div class="contacts">
-          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
-          <p><b>Website </b> : www.msrit.edu</p>
-          <p><b>Email </b>: principal@msrit.edu</p>
-        </div>
-        <div class="divider"></div>
-      </div>
+      <Header />
       <div class="page p2">
         <div class="d-flex justify-center mt-6">
           <p><b>'B' ACADEMIC DETAILS</b></p>
@@ -826,6 +833,9 @@
             <td>{{ formDetails.s5.profDetails.noy[index] }}</td>
           </tr>
         </table>
+      </div>
+      <Header />
+      <div class="page p4">
         <p class="mt-4"><b>5. Details of Publications in last 3 years</b>:-</p>
         <table>
           <tr>
@@ -887,27 +897,19 @@
             <td>{{ formDetails.s5.patents.year[index] }}</td>
           </tr>
         </table>
+        <p class="mt-4"><b>8. Application Fee Payment Details</b>:-</p>
+        <table>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Transaction Date</th>
+          </tr>
+          <tr>
+            <td>{{ formDetails.s0.tid }}</td>
+            <td>{{ formDetails.s0.date }}</td>
+          </tr>
+        </table>
       </div>
-      <div class="header">
-        <img src="../assets/purple.png" alt="" />
-        <!-- <p>
-          Autonomous Institute, affiliated to Visvesvaraya Technological
-          University, Belagavi
-        </p>
-        <h4>VIDYA SOUDHA</h4>
-        <p>
-          Recognized by Govt. of Karnataka AICTE, accredited by NBA & NAAC ‘A+’
-        </p>
-        <p>Subject to Bangalore Jurisdiction Only</p>
-        <p>M.S.RAMAIAH NAGAR, M.S.R.I.T.POST, BENGALURU -560 054</p> -->
-        <div class="divider"></div>
-        <div class="contacts">
-          <p><b>Phone Nos. </b>: 080-23600822, 23606934, 23606936, 23607902</p>
-          <p><b>Website </b> : www.msrit.edu</p>
-          <p><b>Email </b>: principal@msrit.edu</p>
-        </div>
-        <div class="divider"></div>
-      </div>
+      <Header />
       <div class="page p3">
         <div class="d-flex justify-center mt-6">
           <p><b>Declaration By The Candidate</b></p>
@@ -1021,10 +1023,14 @@
 </template>
 
 <script>
+import Header from "../components/Header.vue";
 export default {
+  components: {
+    Header,
+  },
   data() {
     return {
-      e1: 5,
+      e1: 0,
       profCount: [0],
       publicationCount: [0],
       projectCount: [0],
@@ -1081,11 +1087,15 @@ export default {
       type: ["Journal", "Conference"],
       patentStatus: ["Filed", "Granted", "Published"],
       formDetails: {
+        s0: {
+          tid: "",
+          date: "",
+        },
         s1: {
           name: "",
           dept: "",
           area: "",
-          year: "",
+          year: "2021-22",
         },
         s2: {
           reg: "",
@@ -1240,30 +1250,8 @@ export default {
       width: 100%;
       background: #000;
     }
-    .header {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        width: 150px;
-      }
-
-      p {
-        font-size: xx-small;
-        margin: 0;
-        padding: 0;
-      }
-      h4 {
-        margin: 0;
-        padding: 0;
-      }
-      .contacts {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
+    .table-break {
+      page-break-after: always;
     }
     .page {
       width: 100%;
@@ -1316,7 +1304,7 @@ export default {
       ol {
         li {
           text-align: justify;
-          margin: 0.8rem 0;
+          margin: 0.5rem 0;
         }
       }
       td {
