@@ -467,7 +467,10 @@
 
         <v-stepper-content step="5">
           <v-card class="mb-12 elevation-0" min-height="200px">
-            <h2>Professional details in reverse chronological order</h2>
+            <h2>Details of Employment ( if aplicable )</h2>
+            <h2 class="mt-5">
+              Professional details in reverse chronological order
+            </h2>
             <v-divider class="my-5"></v-divider>
             <div>
               <div v-for="(i, index) in profCount" :key="index">
