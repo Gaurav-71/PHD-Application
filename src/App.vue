@@ -32,7 +32,7 @@
       ><br />
       <span style="font-size: 15px"
         >Phone Nos : 080-23600822, 23606934, 23606936, 23607902 &emsp; &emsp;
-        Website : www.msrit.edu &emsp; &emsp; Email : principal@msrit.edu</span
+        Website : www.msrit.edu &emsp; &emsp; Email : phd@msrit.edu</span
       >
     </footer>
   </v-app>

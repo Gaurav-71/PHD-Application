@@ -1,5 +1,5 @@
 <template>
-  <div class="form-page">
+  <div id="top" class="form-page">
     <h2 class="page-title">Application for Ph.D Admission (Full Time)</h2>
     <v-stepper class="stepper elevation-2" v-model="e1">
       <v-stepper-header>
@@ -36,7 +36,6 @@
         <v-divider></v-divider>
         <v-stepper-step step="6"> Declaration </v-stepper-step>
       </v-stepper-header>
-
       <v-stepper-items>
         <v-stepper-content step="0">
           <v-card class="mb-12 elevation-0" min-height="200px">
@@ -51,6 +50,7 @@
               <v-text-field
                 v-model="formDetails.s0.tid"
                 label="Transaction ID"
+                :rules="tidRule"
                 filled
                 class="mr-2"
               ></v-text-field>
@@ -78,7 +78,9 @@
             <p><b>Swift Code</b> : KARBINBBBNG</p>
           </v-card>
           <div class="btn-container">
-            <v-btn color="primary" @click="e1 = 1"> Next </v-btn>
+            <a href="#top">
+              <v-btn color="primary" @click="e1 = 1"> Next </v-btn>
+            </a>
           </div>
         </v-stepper-content>
 
@@ -87,13 +89,15 @@
             <v-text-field
               v-model="formDetails.s1.name"
               label="Full Name ( As per Qualifying Exam Marks card )"
+              :rules="strRule"
               filled
             ></v-text-field>
-            <v-text-field
+            <v-select
+              :items="depts"
               v-model="formDetails.s1.dept"
-              label="Department applied for"
               filled
-            ></v-text-field>
+              label="Department applied for"
+            ></v-select>
             <v-text-field
               v-model="formDetails.s1.year"
               label="Ph.D for the year"
@@ -103,12 +107,17 @@
             <v-text-field
               v-model="formDetails.s1.area"
               label="Area of research"
+              :rules="strRule"
               filled
             ></v-text-field> </v-card
           ><v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 0"> Back </v-btn>
-            <v-btn color="primary" @click="e1 = 2"> Next </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 0"> Back </v-btn>
+            </a>
+            <a href="#top">
+              <v-btn color="primary" @click="e1 = 2"> Next </v-btn>
+            </a>
           </div>
         </v-stepper-content>
 
@@ -118,18 +127,21 @@
               <v-text-field
                 v-model="formDetails.s2.reg"
                 label="VTU-ETR Reg. No"
+                :rules="requiredRule"
                 filled
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s2.score"
                 label="Score"
                 filled
+                :rules="scoreRule"
                 class="mx-5"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s2.year"
                 label="Year of VTU-ETR"
                 filled
+                :rules="yearRule"
               ></v-text-field>
             </div>
             <v-select
@@ -142,17 +154,20 @@
               <v-text-field
                 v-model="formDetails.s2.fname"
                 label="First Name"
+                :rules="strRule"
                 filled
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s2.mname"
                 label="Middle Name"
+                :rules="strRule"
                 filled
                 class="mx-5"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s2.lname"
                 label="Last Name/Surname/Initials"
+                :rules="strRule"
                 filled
               ></v-text-field>
             </div>
@@ -173,6 +188,7 @@
               <v-text-field
                 v-model="formDetails.s2.blood"
                 label="Blood Group"
+                :rules="requiredRule"
                 filled
               ></v-text-field>
             </div>
@@ -181,6 +197,7 @@
                 v-model="formDetails.s2.aname"
                 label="Father's/Husband's Name"
                 class="mr-2"
+                :rules="strRule"
                 filled
               ></v-text-field>
               <v-select
@@ -194,8 +211,11 @@
           </v-card>
           <v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 1"> Back </v-btn>
-            <v-btn color="primary" @click="e1 = 3"> Next </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 1"> Back </v-btn> </a
+            ><a href="#top">
+              <v-btn color="primary" @click="e1 = 3"> Next </v-btn></a
+            >
           </div>
         </v-stepper-content>
 
@@ -209,6 +229,7 @@
                 label="Address"
                 filled
                 class="mr-5"
+                :rules="requiredRule"
               ></v-text-field>
               <v-select
                 :items="states"
@@ -221,26 +242,33 @@
                 label="City"
                 filled
                 class="mx-5"
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s3.communication.pincode"
                 label="Pincode"
+                :rules="pincodeRule"
                 filled
               ></v-text-field>
             </div>
             <v-text-field
               v-model="formDetails.s3.communication.phno"
-              label="Phone Number (with Code)"
+              label="Phone Number"
+              :rules="phnoRule"
               filled
             ></v-text-field>
             <h2>Permanent Address</h2>
             <v-divider class="my-5"></v-divider>
+            <v-btn @click="copyAddr()" color="primary" class="rounded mb-6"
+              >Same as Adress for communication</v-btn
+            >
             <div class="d-flex">
               <v-text-field
                 v-model="formDetails.s3.permanent.addr"
                 label="Address"
                 filled
                 class="mr-5"
+                :rules="requiredRule"
               ></v-text-field>
               <v-select
                 :items="states"
@@ -253,10 +281,12 @@
                 label="City"
                 filled
                 class="mx-5"
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s3.permanent.pincode"
                 label="Pincode"
+                :rules="pincodeRule"
                 filled
               ></v-text-field>
             </div>
@@ -264,17 +294,20 @@
               <v-text-field
                 v-model="formDetails.s3.permanent.mobile"
                 label="Mobile No."
+                :rules="phnoRule"
                 filled
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s3.permanent.phno"
-                label="Phone No. (with Code)"
+                label="Phone No."
                 class="mx-5"
+                :rules="phnoRule"
                 filled
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s3.permanent.emergency"
                 label="Emergency Contact Number "
+                :rules="phnoRule"
                 filled
               ></v-text-field>
             </div>
@@ -282,6 +315,7 @@
               <v-text-field
                 v-model="formDetails.s3.permanent.email"
                 label="Email ID"
+                :rules="emailRule"
                 filled
               ></v-text-field>
               <v-text-field
@@ -289,11 +323,13 @@
                 label="Domicile"
                 class="mx-5"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s3.permanent.motherTongue"
                 label="Mother Tongue"
                 filled
+                :rules="strRule"
               ></v-text-field>
             </div>
             <div class="d-flex">
@@ -301,6 +337,7 @@
                 v-model="formDetails.s3.permanent.pob"
                 label="Place of birth"
                 filled
+                :rules="requiredRule"
               ></v-text-field>
               <v-select
                 :items="states"
@@ -313,13 +350,17 @@
                 v-model="formDetails.s3.permanent.nationality"
                 label="Nationality"
                 filled
+                :rules="strRule"
               ></v-text-field>
             </div>
           </v-card>
           <v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 2"> Back </v-btn>
-            <v-btn color="primary" @click="e1 = 4"> Next </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 2"> Back </v-btn></a
+            ><a href="#top">
+              <v-btn color="primary" @click="e1 = 4"> Next </v-btn></a
+            >
           </div>
         </v-stepper-content>
 
@@ -332,17 +373,20 @@
                 v-model="formDetails.s4.ug.college"
                 label="College"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.ug.univ"
                 label="University"
                 class="mx-5"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.ug.yop"
                 label="Year of Passing"
                 filled
+                :rules="yearRule"
               ></v-text-field>
             </div>
             <div class="d-flex">
@@ -350,17 +394,20 @@
                 v-model="formDetails.s4.ug.specialization"
                 label="Specialization"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.ug.cgpa"
                 label="Percentage/CGPA"
                 filled
                 class="mx-5"
+                :rules="scoreRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.ug.thesis"
                 label="Title of UG Thesis"
                 filled
+                :rules="requiredRule"
               ></v-text-field>
             </div>
             <h2>PG Details</h2>
@@ -370,17 +417,20 @@
                 v-model="formDetails.s4.pg.college"
                 label="College"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.pg.univ"
                 label="University"
                 class="mx-5"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.pg.yop"
                 label="Year of Passing"
                 filled
+                :rules="yearRule"
               ></v-text-field>
             </div>
             <div class="d-flex">
@@ -388,24 +438,30 @@
                 v-model="formDetails.s4.pg.specialization"
                 label="Specialization"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.pg.cgpa"
                 label="Percentage/CGPA"
                 filled
                 class="mx-5"
+                :rules="scoreRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s4.pg.thesis"
                 label="Title of PG Thesis"
                 filled
+                :rules="requiredRule"
               ></v-text-field>
             </div>
           </v-card>
           <v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 3"> Back </v-btn>
-            <v-btn color="primary" @click="e1 = 5"> Next </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 3"> Back </v-btn></a
+            ><a href="#top">
+              <v-btn color="primary" @click="e1 = 5"> Next </v-btn></a
+            >
           </div>
         </v-stepper-content>
 
@@ -416,19 +472,22 @@
             <div class="d-flex">
               <v-text-field
                 v-model="formDetails.s5.name"
-                label=" Name of the Institute/Organization"
+                label="Name of the Institute/Organization"
                 filled
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s5.designation"
                 label="Designation"
                 filled
                 class="mx-5"
+                :rules="strRule"
               ></v-text-field>
               <v-text-field
                 v-model="formDetails.s5.yoe"
                 label="Years of Experience"
                 filled
+                :rules="numberRule"
               ></v-text-field>
             </div>
             <h2>Professional details in reverse chronological order</h2>
@@ -442,29 +501,34 @@
                     label="Name of the Institute/Organization"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.profDetails.designation[index]"
                     label="Designation"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.profDetails.from[index]"
                     label="From"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.profDetails.to[index]"
                     label="To"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.profDetails.noy[index]"
                     label="No. of years"
                     filled
+                    :rules="numberRule"
                   ></v-text-field>
                 </div>
               </div>
@@ -485,12 +549,14 @@
                     label="Name of Authors"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.publications.title[index]"
                     label="Title of Paper"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-select
                     :items="type"
@@ -508,17 +574,20 @@
                     "
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.publications.doi[index]"
                     label="Vol issue, DOI"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.publications.year[index]"
                     label="Year"
                     filled
+                    :rules="yearRule"
                   ></v-text-field>
                 </div>
               </div>
@@ -540,35 +609,41 @@
                     label="Name of Investigator/s"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.projects.org[index]"
                     label="Name of the Organization"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.projects.title[index]"
                     label="Title of Project"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.projects.amt[index]"
                     label="Amount Sanctioned"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.projects.yos[index]"
                     label="Year of Sanction"
                     filled
                     class="mr-5"
+                    :rules="yearRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.projects.duration[index]"
                     label="Duration"
                     filled
+                    :rules="requiredRule"
                   ></v-text-field>
                 </div>
               </div>
@@ -590,18 +665,21 @@
                     label="Name of Investigator/s"
                     filled
                     class="mr-5"
+                    :rules="strRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.patents.title[index]"
                     label="Title of Patent"
                     filled
                     class="mr-5"
+                    :rules="requiredRule"
                   ></v-text-field>
                   <v-text-field
                     v-model="formDetails.s5.patents.number[index]"
                     label="Number"
                     filled
                     class="mr-5"
+                    :rules="numberRule"
                   ></v-text-field>
                   <v-select
                     :items="patentStatus"
@@ -615,6 +693,7 @@
                     label="Year"
                     filled
                     class="mr-5"
+                    :rules="yearRule"
                   ></v-text-field>
                 </div>
               </div>
@@ -627,14 +706,49 @@
           </v-card>
           <v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 4"> Back </v-btn>
-            <v-btn color="primary" @click="e1 = 6"> Next </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 4"> Back </v-btn></a
+            ><a href="#top">
+              <v-btn color="primary" @click="e1 = 6"> Next </v-btn></a
+            >
           </div>
         </v-stepper-content>
 
         <v-stepper-content step="6">
           <v-card class="mb-12 elevation-0" min-height="200px">
-            <h2>Declaration By The Candidate</h2>
+            <h2>Documents to be attached with application form :-</h2>
+            <v-divider class="my-5"></v-divider>
+            <ol>
+              <li>
+                10th Standard marks card as proof for the date of birth
+                (Attested)
+              </li>
+
+              <li>
+                Marks cards and Degree Certificate of Under Graduate (Attested)
+              </li>
+
+              <li>
+                Marks cards and Degree Certificate of Post Graduate (Attested)
+              </li>
+
+              <li>Valid competitive examination certificate</li>
+
+              <li>Migration Certificate, if from outside Karnataka state</li>
+
+              <li>Payment receipt of application fee</li>
+
+              <li>Aadhaar card</li>
+
+              <li>
+                No Objection Certificate from the institute/organization, if
+                applicable
+              </li>
+
+              <li>Abstract of Research Problem (maximum of 1000 words)</li>
+            </ol>
+
+            <h2 class="mt-8">Declaration By The Candidate</h2>
             <v-divider class="my-5"></v-divider>
             <ol>
               <li>
@@ -674,7 +788,9 @@
           </v-card>
           <v-divider class="my-5"></v-divider>
           <div class="btn-container">
-            <v-btn class="mr-3" @click="e1 = 5"> Back </v-btn>
+            <a href="#top">
+              <v-btn class="mr-3" @click="e1 = 5"> Back </v-btn></a
+            >
             <v-btn
               :disabled="!formDetails.s6.checkbox"
               @click="prtScreen()"
@@ -726,12 +842,12 @@
           <p><b>Gender</b> : {{ formDetails.s2.gender }}</p>
           <p><b>Blood Group</b> : {{ formDetails.s2.blood }}</p>
         </div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between">
           <p><b>Father’s/Husband’s Name</b> : {{ formDetails.s2.aname }}</p>
           <p><b>Category</b> : {{ formDetails.s2.category }}</p>
         </div>
         <p><b>Address for Communication :-</b></p>
-        <div class="d-flex justify-space-between mt-0">
+        <div class="d-flex justify-space-between">
           {{ formDetails.s3.communication.addr }},
           {{ formDetails.s3.communication.city }},
           {{ formDetails.s3.communication.state }},
@@ -739,13 +855,13 @@
         </div>
         <p><b>Phone Number</b> : {{ formDetails.s3.communication.phno }}</p>
         <p><b>Permanent Address :-</b></p>
-        <div class="d-flex justify-space-between mt-0">
+        <div class="d-flex justify-space-between">
           {{ formDetails.s3.permanent.addr }},
           {{ formDetails.s3.permanent.city }},
           {{ formDetails.s3.permanent.state }},
           {{ formDetails.s3.permanent.pincode }}
         </div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between">
           <p><b>Phone No.</b> : {{ formDetails.s3.permanent.phno }}</p>
           <p><b>Mobile No.</b> : {{ formDetails.s3.permanent.mobile }}</p>
           <p>
@@ -753,14 +869,14 @@
             {{ formDetails.s3.permanent.emergency }}
           </p>
         </div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between">
           <p><b>Email</b>: {{ formDetails.s3.permanent.email }}</p>
           <p><b>Nationality</b>: {{ formDetails.s3.permanent.nationality }}</p>
           <p>
             <b>Mother Tongue</b>: {{ formDetails.s3.permanent.motherTongue }}
           </p>
         </div>
-        <div class="d-flex justify-space-between mt-2">
+        <div class="d-flex justify-space-between">
           <p><b>Domicile</b>: {{ formDetails.s3.permanent.domicile }}</p>
           <p><b>Place of Birth</b>: {{ formDetails.s3.permanent.pob }}</p>
           <p><b>State of Birth</b>: {{ formDetails.s3.permanent.sob }}</p>
@@ -1093,6 +1209,27 @@ export default {
       genders: ["Male", "Female"],
       type: ["Journal", "Conference"],
       patentStatus: ["Filed", "Granted", "Published"],
+      depts: [
+        "Architecture",
+        "Biotechnology",
+        "Chemical Engineering",
+        "Chemistry",
+        "Civil Engineering",
+        "Computer Science & Engineering",
+        "Electronics & Communication Engineering",
+        "Electronics & Instrumentation Engineering",
+        "Electrical & Electronics Engineering",
+        "Electronics & Telecommunication Engineering",
+        "Humanities",
+        "Industrial Engineering & Management",
+        "Information Science & Engineering",
+        "Mathematics",
+        "Master of Computer Applications(MCA)",
+        "Management Studies(MBA)",
+        "Mechanical Engineering",
+        "Medical Electronics",
+        "Physics",
+      ],
       formDetails: {
         s0: {
           tid: "",
@@ -1199,11 +1336,58 @@ export default {
           checkbox: false,
         },
       },
+      tidRule: [
+        (v) => !!v || "This field is required",
+        (v) => !!v || "Transaction ID is required",
+      ],
+      yearRule: [
+        (v) => !!v || "Year is required",
+        (v) => /^\d+$/.test(v) || "Characters not allowed",
+        (v) => (v && v.length <= 4) || "Invalid year",
+        (v) => (v >= 1930 && v <= 2050) || "Invalid year",
+      ],
+      pincodeRule: [
+        (v) => !!v || "Pincode is required",
+        (v) => /^\d+$/.test(v) || "Characters not allowed",
+        (v) => (v && v.length == 6) || "Invalid pincode",
+      ],
+      phnoRule: [
+        (v) => !!v || "This field is required",
+        (v) => /^\d+$/.test(v) || "Characters not allowed",
+        (v) => (v && v.length <= 12) || "Invalid  Number",
+      ],
+      emailRule: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      ],
+      strRule: [
+        (v) => !!v || "This field is required",
+        (v) => !/\d/.test(v) || "Numbers not allowed",
+      ],
+      requiredRule: [(v) => !!v || "This field is required"],
+      scoreRule: [
+        (v) => !!v || "This field is required",
+        (v) => (v >= 0 && v <= 100) || "Invalid score",
+      ],
+      numberRule: [
+        (v) => !!v || "This field is required",
+        (v) => /^\d+$/.test(v) || "Characters not allowed",
+      ],
     };
   },
   methods: {
     prtScreen() {
       window.print();
+    },
+    copyAddr() {
+      this.formDetails.s3.permanent.addr =
+        this.formDetails.s3.communication.addr;
+      this.formDetails.s3.permanent.state =
+        this.formDetails.s3.communication.state;
+      this.formDetails.s3.permanent.city =
+        this.formDetails.s3.communication.city;
+      this.formDetails.s3.permanent.pincode =
+        this.formDetails.s3.communication.pincode;
     },
     updateCount(type) {
       switch (type) {
@@ -1311,7 +1495,7 @@ export default {
       ol {
         li {
           text-align: justify;
-          margin: 0.5rem 0;
+          margin: 0.25rem 0;
         }
       }
       td {
@@ -1322,6 +1506,10 @@ export default {
 }
 
 @media print {
+  @page {
+    size: A4 portrait; /* auto is default portrait; */
+    padding: 2rem 1rem;
+  }
   .stepper,
   .page-title {
     display: none !important;

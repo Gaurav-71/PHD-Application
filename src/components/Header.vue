@@ -38,7 +38,7 @@ export default {};
   flex-direction: column;
   align-items: center;
   p {
-    font-size: xx-small;
+    font-size: small;
     margin: 0;
     padding: 0;
   }
@@ -53,8 +53,8 @@ export default {};
     }
     .content {
       text-align: center;
-      h3,
-      h5 {
+      h2,
+      h4 {
         margin: 0;
         padding: 0;
       }
