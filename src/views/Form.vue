@@ -260,7 +260,7 @@
             <h2>Permanent Address</h2>
             <v-divider class="my-5"></v-divider>
             <v-btn @click="copyAddr()" color="primary" class="rounded mb-6"
-              >Same as Adress for communication</v-btn
+              >Same as Address for communication</v-btn
             >
             <div class="d-flex">
               <v-text-field
@@ -1210,14 +1210,12 @@ export default {
       type: ["Journal", "Conference"],
       patentStatus: ["Filed", "Granted", "Published"],
       depts: [
-        "Architecture",
         "Biotechnology",
         "Chemical Engineering",
         "Chemistry",
         "Civil Engineering",
         "Computer Science & Engineering",
         "Electronics & Communication Engineering",
-        "Electronics & Instrumentation Engineering",
         "Electrical & Electronics Engineering",
         "Electronics & Telecommunication Engineering",
         "Humanities",
