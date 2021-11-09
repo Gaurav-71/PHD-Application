@@ -467,29 +467,6 @@
 
         <v-stepper-content step="5">
           <v-card class="mb-12 elevation-0" min-height="200px">
-            <h2>Details of Employment (if applicable)</h2>
-            <v-divider class="my-5"></v-divider>
-            <div class="d-flex">
-              <v-text-field
-                v-model="formDetails.s5.name"
-                label="Name of the Institute/Organization"
-                filled
-                :rules="strRule"
-              ></v-text-field>
-              <v-text-field
-                v-model="formDetails.s5.designation"
-                label="Designation"
-                filled
-                class="mx-5"
-                :rules="strRule"
-              ></v-text-field>
-              <v-text-field
-                v-model="formDetails.s5.yoe"
-                label="Years of Experience"
-                filled
-                :rules="numberRule"
-              ></v-text-field>
-            </div>
             <h2>Professional details in reverse chronological order</h2>
             <v-divider class="my-5"></v-divider>
             <div>
@@ -929,14 +906,7 @@
         <div class="d-flex justify-center mt-6">
           <p><b>'C' PROFESSIONAL DETAILS</b></p>
         </div>
-        <p><b>Details of Employment :-</b></p>
-        <p>
-          <b>1. Name of the Institute/Organization</b> :
-          {{ formDetails.s5.name }}
-        </p>
-        <p><b>2. Designation</b> : {{ formDetails.s5.designation }}</p>
-        <p><b>3. Years of experience</b> : {{ formDetails.s5.yoe }}</p>
-        <p><b>4. Professional details in reverse chronological order </b> :-</p>
+        <p><b>1. Professional details in reverse chronological order </b> :-</p>
         <table>
           <tr>
             <th>Sl. No.</th>
@@ -958,7 +928,7 @@
       </div>
       <Header />
       <div class="page p4">
-        <p class="mt-4"><b>5. Details of Publications in last 3 years</b>:-</p>
+        <p class="mt-4"><b>2. Details of Publications in last 3 years</b>:-</p>
         <table>
           <tr>
             <th>Sl. No.</th>
@@ -979,7 +949,7 @@
             <td>{{ formDetails.s5.publications.year[index] }}</td>
           </tr>
         </table>
-        <p class="mt-4"><b>6. Details of Funded/Consultancy Projects</b>:-</p>
+        <p class="mt-4"><b>3. Details of Funded/Consultancy Projects</b>:-</p>
         <table>
           <tr>
             <th>Sl. No.</th>
@@ -1000,7 +970,7 @@
             <td>{{ formDetails.s5.projects.duration[index] }}</td>
           </tr>
         </table>
-        <p class="mt-4"><b>7. Patents if any</b>:-</p>
+        <p class="mt-4"><b>4. Patents if any</b>:-</p>
         <table>
           <tr>
             <th>Sl. No.</th>
@@ -1019,7 +989,7 @@
             <td>{{ formDetails.s5.patents.year[index] }}</td>
           </tr>
         </table>
-        <p class="mt-4"><b>8. Application Fee Payment Details</b>:-</p>
+        <p class="mt-4"><b>5. Application Fee Payment Details</b>:-</p>
         <table>
           <tr>
             <th>Transaction ID</th>
@@ -1157,16 +1127,7 @@ export default {
       publicationCount: [0],
       projectCount: [0],
       patentCount: [0],
-      eligibility: [
-        "ADF",
-        "QIP",
-        "FIP",
-        "UGC_NET",
-        "UGC_CSIR_NET",
-        "SLET",
-        "GATE",
-        "CAT",
-      ],
+      eligibility: ["UGC_NET", "UGC_CSIR_NET", "SLET", "GATE", "CAT"],
       category: ["GM", "SC", "ST", "OBC", "NRI"],
       states: [
         "Andaman and Nicobar Islands",
@@ -1218,7 +1179,6 @@ export default {
         "Electronics & Communication Engineering",
         "Electrical & Electronics Engineering",
         "Electronics & Telecommunication Engineering",
-        "Humanities",
         "Industrial Engineering & Management",
         "Information Science & Engineering",
         "Mathematics",
