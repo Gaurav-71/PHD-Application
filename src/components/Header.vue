@@ -79,6 +79,6 @@ export default {};
   //margin: 0.5rem 0;
   height: 0.5px;
   width: 100%;
-  background: #000;
+  border: 0.5px solid #000;
 }
 </style>

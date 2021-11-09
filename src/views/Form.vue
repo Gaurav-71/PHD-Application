@@ -467,7 +467,7 @@
 
         <v-stepper-content step="5">
           <v-card class="mb-12 elevation-0" min-height="200px">
-            <h2>Details of Employment ( if aplicable )</h2>
+            <h2>Details of Employment ( if applicable )</h2>
             <h2 class="mt-5">
               Professional details in reverse chronological order
             </h2>
@@ -698,35 +698,143 @@
           <v-card class="mb-12 elevation-0" min-height="200px">
             <h2>Documents to be attached with application form :-</h2>
             <v-divider class="my-5"></v-divider>
-            <ol>
-              <li>
-                10th Standard marks card as proof for the date of birth
-                (Attested)
-              </li>
+            <table class="doc-table">
+              <tr>
+                <th>Sl. No.</th>
+                <th>Documents</th>
+                <th>Yes / No</th>
+              </tr>
+              <tr>
+                <td>1.</td>
+                <td class="point">
+                  10th Standard marks card as proof for the date of birth
+                  (Attested)
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b1"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td class="point">
+                  Marks cards and Degree Certificate of Under Graduate
+                  (Attested)
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b2"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>
-                Marks cards and Degree Certificate of Under Graduate (Attested)
-              </li>
+              <tr>
+                <td>3.</td>
+                <td class="point">
+                  Marks cards and Degree Certificate of Post Graduate (Attested)
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b3"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>
-                Marks cards and Degree Certificate of Post Graduate (Attested)
-              </li>
+              <tr>
+                <td>4.</td>
+                <td class="point">Valid competitive examination certificate</td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b4"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>Valid competitive examination certificate</li>
+              <tr>
+                <td>5.</td>
+                <td class="point">
+                  Migration Certificate, if from outside Karnataka state
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b5"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>Migration Certificate, if from outside Karnataka state</li>
+              <tr>
+                <td>6.</td>
+                <td class="point">Payment receipt of application fee</td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b6"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>Payment receipt of application fee</li>
+              <tr>
+                <td>7.</td>
+                <td class="point">Aadhaar card</td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b7"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>Aadhaar card</li>
+              <tr>
+                <td>8.</td>
+                <td class="point">
+                  No Objection Certificate from the institute/organization, if
+                  applicable
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b8"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
 
-              <li>
-                No Objection Certificate from the institute/organization, if
-                applicable
-              </li>
-
-              <li>Abstract of Research Problem (maximum of 1000 words)</li>
-            </ol>
+              <tr>
+                <td>9.</td>
+                <td class="point">
+                  Abstract of Research Problem (maximum of 1000 words)
+                </td>
+                <td>
+                  <v-select
+                    :items="docStatus"
+                    v-model="formDetails.s6.b9"
+                    label="Yes/No"
+                    class="mx-4"
+                  ></v-select>
+                </td>
+              </tr>
+            </table>
 
             <h2 class="mt-8">Declaration By The Candidate</h2>
             <v-divider class="my-5"></v-divider>
@@ -1055,14 +1163,14 @@
             <td>
               10th Standard marks card as proof for the date of birth (Attested)
             </td>
-            <td></td>
+            <td>{{ formDetails.s6.b1 }}</td>
           </tr>
           <tr>
             <td>2.</td>
             <td>
               Marks cards and Degree Certificate of Under Graduate (Attested)
             </td>
-            <td></td>
+            <td>{{ formDetails.s6.b2 }}</td>
           </tr>
 
           <tr>
@@ -1070,31 +1178,31 @@
             <td>
               Marks cards and Degree Certificate of Post Graduate (Attested)
             </td>
-            <td></td>
+            <td>{{ formDetails.s6.b3 }}</td>
           </tr>
 
           <tr>
             <td>4.</td>
             <td>Valid competitive examination certificate</td>
-            <td></td>
+            <td>{{ formDetails.s6.b4 }}</td>
           </tr>
 
           <tr>
             <td>5.</td>
             <td>Migration Certificate, if from outside Karnataka state</td>
-            <td></td>
+            <td>{{ formDetails.s6.b5 }}</td>
           </tr>
 
           <tr>
             <td>6.</td>
             <td>Payment receipt of application fee</td>
-            <td></td>
+            <td>{{ formDetails.s6.b6 }}</td>
           </tr>
 
           <tr>
             <td>7.</td>
             <td>Aadhaar card</td>
-            <td></td>
+            <td>{{ formDetails.s6.b7 }}</td>
           </tr>
 
           <tr>
@@ -1103,13 +1211,13 @@
               No Objection Certificate from the institute/organization, if
               applicable
             </td>
-            <td></td>
+            <td>{{ formDetails.s6.b8 }}</td>
           </tr>
 
           <tr>
             <td>9.</td>
             <td>Abstract of Research Problem (maximum of 1000 words)</td>
-            <td></td>
+            <td>{{ formDetails.s6.b9 }}</td>
           </tr>
         </table>
       </div>
@@ -1191,6 +1299,7 @@ export default {
         "Medical Electronics",
         "Physics",
       ],
+      docStatus: ["Yes", "No"],
       formDetails: {
         s0: {
           tid: "",
@@ -1295,6 +1404,15 @@ export default {
         },
         s6: {
           checkbox: false,
+          b1: "",
+          b2: "",
+          b3: "",
+          b4: "",
+          b5: "",
+          b6: "",
+          b7: "",
+          b8: "",
+          b9: "",
         },
       },
       tidRule: [
@@ -1462,6 +1580,24 @@ export default {
       td {
         text-align: left;
       }
+    }
+  }
+  .doc-table {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .doc-table {
+    width: 100%;
+    td,
+    th {
+      text-align: center;
+      padding: 0.25rem;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    .point {
+      text-align: left;
+      padding-left: 0.8rem;
     }
   }
 }
