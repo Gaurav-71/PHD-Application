@@ -4,6 +4,10 @@
 
 https://msrit-phd-applications.web.app/
 
+## Node Version
+
+`12.16.1`
+
 ## Project setup
 
 ```
