@@ -5,8 +5,8 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 
-import firebase from "firebase/app";
-import "firebase/analytics";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJR6A7JqhiFBrWf6TwfVy0Ot-PgiO9Kdc",
@@ -18,9 +18,8 @@ const firebaseConfig = {
   measurementId: "G-SQWFJRZS0V",
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics();
 
 Vue.config.productionTip = false;
 
