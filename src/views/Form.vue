@@ -134,7 +134,6 @@
                 v-model="formDetails.s2.score"
                 label="Score"
                 filled
-                :rules="scoreRule"
                 class="mx-5"
               ></v-text-field>
               <v-text-field
